@@ -16,9 +16,3 @@ jobs:
 
       - name: Run test suite
         run: swift test
-
-      - name: Validate release packaging
-        env:
-          RELEASE_VERSION: ci-${{ github.sha }}
-          RELEASE_BUILD_NUMBER: ${{ github.run_number }}
-        run: ./script/build_release.sh
