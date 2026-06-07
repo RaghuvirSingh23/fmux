@@ -86,7 +86,7 @@ final class CanvasViewportView: NSView {
     private weak var store: CanvasStore?
     private weak var appModel: AppModel?
     private var appearanceMode: AppAppearanceMode = .dark
-    private var theme = FloatermTheme(appearance: .dark)
+    private var theme = FmuxTheme(appearance: .dark)
     private let worldView = NSView()
     private var frameViews: [UUID: CanvasFrameItemView] = [:]
     private var nodeViews: [UUID: TerminalNodeView] = [:]
@@ -817,7 +817,7 @@ final class CanvasViewportView: NSView {
     }
 
     private func updateThemeIfNeeded() {
-        let resolvedTheme = FloatermTheme(mode: appearanceMode, effectiveAppearance: effectiveAppearance)
+        let resolvedTheme = FmuxTheme(mode: appearanceMode, effectiveAppearance: effectiveAppearance)
         guard resolvedTheme != theme else {
             return
         }
@@ -870,7 +870,7 @@ final class CanvasFrameItemView: NSView {
         }
     }
 
-    var theme = FloatermTheme(appearance: .dark) {
+    var theme = FmuxTheme(appearance: .dark) {
         didSet {
             guard theme != oldValue else {
                 return
@@ -1200,7 +1200,7 @@ final class TerminalNodeView: NSView {
         }
     }
 
-    var theme = FloatermTheme(appearance: .dark) {
+    var theme = FmuxTheme(appearance: .dark) {
         didSet {
             guard theme != oldValue else {
                 return
@@ -1587,7 +1587,7 @@ final class CanvasTextItemView: NSView {
         }
     }
 
-    var theme = FloatermTheme(appearance: .dark) {
+    var theme = FmuxTheme(appearance: .dark) {
         didSet {
             guard theme != oldValue else {
                 return
@@ -2470,7 +2470,7 @@ final class TerminalWebView: WKWebView, WKNavigationDelegate, WKScriptMessageHan
         }
     }
 
-    var appearanceTheme: FloatermResolvedAppearance = .dark {
+    var appearanceTheme: FmuxResolvedAppearance = .dark {
         didSet {
             guard appearanceTheme != oldValue else {
                 return

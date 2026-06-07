@@ -1,5 +1,5 @@
 import XCTest
-@testable import Floaterm
+@testable import Fmux
 
 @MainActor
 final class AppSettingsStoreTests: XCTestCase {

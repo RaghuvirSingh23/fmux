@@ -3,8 +3,8 @@ import Foundation
 @MainActor
 final class AppSettingsStore: ObservableObject {
     private let userDefaults: UserDefaults
-    private let appAppearanceModeKey = "floaterm.appAppearanceMode"
-    private let terminalPersistenceModeKey = "floaterm.terminalPersistenceMode"
+    private let appAppearanceModeKey = "fmux.appAppearanceMode"
+    private let terminalPersistenceModeKey = "fmux.terminalPersistenceMode"
 
     @Published var appAppearanceMode: AppAppearanceMode {
         didSet {

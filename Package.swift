@@ -3,28 +3,28 @@
 import PackageDescription
 
 let package = Package(
-    name: "Floaterm",
+    name: "Fmux",
     platforms: [
         .macOS(.v14),
     ],
     products: [
         .executable(
-            name: "Floaterm",
-            targets: ["Floaterm"]
+            name: "Fmux",
+            targets: ["Fmux"]
         ),
     ],
     targets: [
         .executableTarget(
-            name: "Floaterm",
+            name: "Fmux",
             path: "Sources",
             resources: [
                 .copy("Resources/Terminal"),
             ]
         ),
         .testTarget(
-            name: "FloatermTests",
-            dependencies: ["Floaterm"],
-            path: "Tests/FloatermTests"
+            name: "FmuxTests",
+            dependencies: ["Fmux"],
+            path: "Tests/FmuxTests"
         ),
     ]
 )

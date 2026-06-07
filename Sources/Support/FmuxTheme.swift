@@ -1,7 +1,7 @@
 import AppKit
 import SwiftUI
 
-enum FloatermResolvedAppearance: Equatable {
+enum FmuxResolvedAppearance: Equatable {
     case dark
     case light
 
@@ -22,19 +22,19 @@ enum FloatermResolvedAppearance: Equatable {
     }
 }
 
-struct FloatermTheme: Equatable {
-    let appearance: FloatermResolvedAppearance
+struct FmuxTheme: Equatable {
+    let appearance: FmuxResolvedAppearance
 
-    init(appearance: FloatermResolvedAppearance) {
+    init(appearance: FmuxResolvedAppearance) {
         self.appearance = appearance
     }
 
     init(mode: AppAppearanceMode, effectiveAppearance: NSAppearance) {
-        self.appearance = FloatermResolvedAppearance(mode: mode, effectiveAppearance: effectiveAppearance)
+        self.appearance = FmuxResolvedAppearance(mode: mode, effectiveAppearance: effectiveAppearance)
     }
 
     init(colorScheme: ColorScheme) {
-        self.appearance = FloatermResolvedAppearance(colorScheme: colorScheme)
+        self.appearance = FmuxResolvedAppearance(colorScheme: colorScheme)
     }
 
     var canvasBackground: NSColor {

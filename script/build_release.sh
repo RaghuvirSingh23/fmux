@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_NAME="floaterm"
-BUILD_TARGET_NAME="Floaterm"
-BUNDLE_ID="com.raghusi.floaterm"
+APP_NAME="fmux"
+BUILD_TARGET_NAME="Fmux"
+BUNDLE_ID="com.raghusi.fmux"
 MIN_SYSTEM_VERSION="14.0"
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -39,7 +39,7 @@ generate_app_icon() {
   local icon_work_dir
   local iconset_dir
 
-  icon_work_dir="$(mktemp -d "${TMPDIR:-/tmp}/floaterm-icon.XXXXXX")"
+  icon_work_dir="$(mktemp -d "${TMPDIR:-/tmp}/fmux-icon.XXXXXX")"
   iconset_dir="$icon_work_dir/AppIcon.iconset"
   mkdir -p "$iconset_dir"
 
@@ -97,9 +97,10 @@ write_info_plist() {
 PLIST
 }
 
-sign_bundle_if_configured() {
+sign_bundle() {
   local identity="${APPLE_SIGNING_IDENTITY:-}"
   if [[ -z "$identity" ]]; then
+    codesign --force --deep --sign - "$APP_BUNDLE" >/dev/null
     return
   fi
 
@@ -108,7 +109,7 @@ sign_bundle_if_configured() {
 
 create_dmg() {
   local staging_dir
-  staging_dir="$(mktemp -d "${TMPDIR:-/tmp}/floaterm-release.XXXXXX")"
+  staging_dir="$(mktemp -d "${TMPDIR:-/tmp}/fmux-release.XXXXXX")"
   cp -R "$APP_BUNDLE" "$staging_dir/"
   ln -s /Applications "$staging_dir/Applications"
   hdiutil create -volname "$APP_NAME" -srcfolder "$staging_dir" -ov -format UDZO "$DMG_PATH" >/dev/null
@@ -131,7 +132,7 @@ done
 
 generate_app_icon
 write_info_plist
-sign_bundle_if_configured
+sign_bundle
 
 ditto -c -k --sequesterRsrc --keepParent "$APP_BUNDLE" "$ZIP_PATH"
 create_dmg

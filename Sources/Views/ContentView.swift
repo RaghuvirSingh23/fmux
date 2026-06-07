@@ -63,8 +63,8 @@ struct ContentView: View {
         }
     }
 
-    private var theme: FloatermTheme {
-        FloatermTheme(colorScheme: colorScheme)
+    private var theme: FmuxTheme {
+        FmuxTheme(colorScheme: colorScheme)
     }
 
     private var toolbar: some View {

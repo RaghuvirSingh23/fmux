@@ -2,11 +2,11 @@ import AppKit
 import SwiftUI
 
 @main
-struct FloatermApp: App {
+struct FmuxApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {
-        Window("floaterm", id: "main") {
+        Window("fmux", id: "main") {
             ContentView()
                 .frame(minWidth: 1100, minHeight: 720)
         }

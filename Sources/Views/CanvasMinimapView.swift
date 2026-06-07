@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CanvasMinimapView: View {
     @ObservedObject var store: CanvasStore
-    let theme: FloatermTheme
+    let theme: FmuxTheme
     var isExpanded = false
 
     private let maximumMapSize = CGSize(width: 220, height: 152)

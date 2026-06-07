@@ -1,6 +1,6 @@
 import Foundation
 import XCTest
-@testable import Floaterm
+@testable import Fmux
 
 @MainActor
 final class WorkspacePersistenceControllerTests: XCTestCase {

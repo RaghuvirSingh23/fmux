@@ -1,4 +1,4 @@
-# floaterm: Next Ideas
+# fmux: Next Ideas
 
 ## Best Next Additions
 

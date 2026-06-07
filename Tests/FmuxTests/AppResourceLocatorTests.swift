@@ -1,6 +1,6 @@
 import Foundation
 import XCTest
-@testable import Floaterm
+@testable import Fmux
 
 final class AppResourceLocatorTests: XCTestCase {
     func testTerminalFrontendURLResolvesFromAppResourcesDirectory() throws {
@@ -44,7 +44,7 @@ final class AppResourceLocatorTests: XCTestCase {
         let rootURL = fileManager.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
         try fileManager.createDirectory(at: rootURL, withIntermediateDirectories: true)
 
-        let resourceBundleName = "Floaterm_Floaterm.bundle"
+        let resourceBundleName = "Fmux_Fmux.bundle"
         let frontendPath = "Terminal/index.html"
 
         let bundleURL: URL
@@ -53,7 +53,7 @@ final class AppResourceLocatorTests: XCTestCase {
 
         switch layout {
         case .appBundle:
-            bundleURL = rootURL.appendingPathComponent("floaterm.app", isDirectory: true)
+            bundleURL = rootURL.appendingPathComponent("fmux.app", isDirectory: true)
             resourceURL = bundleURL
                 .appendingPathComponent("Contents", isDirectory: true)
                 .appendingPathComponent("Resources", isDirectory: true)
@@ -62,7 +62,7 @@ final class AppResourceLocatorTests: XCTestCase {
                 .appendingPathComponent(frontendPath, isDirectory: false)
         case .swiftPMBuild:
             resourceURL = rootURL.appendingPathComponent("debug", isDirectory: true)
-            bundleURL = resourceURL!.appendingPathComponent("Floaterm", isDirectory: false)
+            bundleURL = resourceURL!.appendingPathComponent("Fmux", isDirectory: false)
             frontendURL = resourceURL!
                 .appendingPathComponent(resourceBundleName, isDirectory: true)
                 .appendingPathComponent(frontendPath, isDirectory: false)

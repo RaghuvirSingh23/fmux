@@ -1,11 +1,11 @@
-# Releasing Floaterm
+# Releasing Fmux
 
 ## What ships
 
 GitHub releases now build the native macOS Swift app and attach:
 
-- a `.zip` containing `floaterm.app`
-- a `.dmg` with `floaterm.app` and an `Applications` shortcut
+- a `.zip` containing `fmux.app`
+- a `.dmg` with `fmux.app` and an `Applications` shortcut
 - a SHA-256 checksum file for both artifacts
 
 ## How to cut a release
@@ -30,7 +30,7 @@ If the tag does not exist yet, the workflow creates the release from the selecte
 
 ## Current status
 
-The pipeline currently produces unsigned artifacts. That is fine for GitHub-hosted downloads and internal testing, but Gatekeeper warnings will still apply.
+The pipeline currently produces ad-hoc signed artifacts unless `APPLE_SIGNING_IDENTITY` is configured. That is fine for GitHub-hosted downloads and internal testing, but Gatekeeper warnings will still apply until Developer ID signing and notarization are enabled.
 
 The next distribution step after this is:
 

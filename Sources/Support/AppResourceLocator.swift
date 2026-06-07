@@ -1,7 +1,7 @@
 import Foundation
 
 enum AppResourceLocator {
-    private static let terminalBundleName = "Floaterm_Floaterm.bundle"
+    private static let terminalBundleName = "Fmux_Fmux.bundle"
     private static let terminalFrontendRelativePath = "Terminal/index.html"
 
     static func terminalFrontendURL(

@@ -1,6 +1,6 @@
 import AppKit
 import XCTest
-@testable import Floaterm
+@testable import Fmux
 
 @MainActor
 final class TerminalNodeViewTests: XCTestCase {
