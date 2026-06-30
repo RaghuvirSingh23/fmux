@@ -1,12 +1,16 @@
 import AppKit
 import SwiftUI
 
+private enum AppIdentity {
+    static let displayName = "Fmux"
+}
+
 @main
 struct FmuxApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     var body: some Scene {
-        Window("fmux", id: "main") {
+        Window(AppIdentity.displayName, id: "main") {
             ContentView()
                 .frame(minWidth: 1100, minHeight: 720)
         }
@@ -119,6 +123,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             return
         }
 
+        window.title = AppIdentity.displayName
         window.delegate = self
         primaryWindow = window
     }

@@ -2,6 +2,8 @@
 set -euo pipefail
 
 APP_NAME="fmux"
+APP_DISPLAY_NAME="Fmux"
+LEGACY_APP_NAME="floaterm"
 BUILD_TARGET_NAME="Fmux"
 BUNDLE_ID="com.raghusi.fmux"
 MIN_SYSTEM_VERSION="14.0"
@@ -17,6 +19,7 @@ INFO_PLIST="$APP_CONTENTS/Info.plist"
 APP_ICON_SOURCE="$ROOT_DIR/Assets/AppIcon.png"
 APP_ICON_PATH="$APP_RESOURCES/AppIcon.icns"
 TARGET_APP="/Applications/$APP_NAME.app"
+LEGACY_TARGET_APP="/Applications/$LEGACY_APP_NAME.app"
 
 if ! command -v swift >/dev/null 2>&1; then
   echo "error: Swift was not found. Install Xcode or the Xcode Command Line Tools first." >&2
@@ -69,9 +72,9 @@ write_info_plist() {
   <key>CFBundleIdentifier</key>
   <string>$BUNDLE_ID</string>
   <key>CFBundleName</key>
-  <string>$APP_NAME</string>
+  <string>$APP_DISPLAY_NAME</string>
   <key>CFBundleDisplayName</key>
-  <string>$APP_NAME</string>
+  <string>$APP_DISPLAY_NAME</string>
   <key>CFBundleIconFile</key>
   <string>AppIcon</string>
   <key>CFBundlePackageType</key>
@@ -88,6 +91,7 @@ PLIST
 }
 
 pkill -x "$APP_NAME" >/dev/null 2>&1 || true
+pkill -x "$LEGACY_APP_NAME" >/dev/null 2>&1 || true
 
 rm -rf "$BUILD_OUTPUT_DIR"
 mkdir -p "$APP_MACOS" "$APP_RESOURCES"
@@ -108,6 +112,7 @@ write_info_plist
 codesign --force --deep --sign - "$APP_BUNDLE" >/dev/null
 
 rm -rf "$TARGET_APP"
+rm -rf "$LEGACY_TARGET_APP"
 ditto "$APP_BUNDLE" "$TARGET_APP"
 
 printf 'Installed %s\n' "$TARGET_APP"

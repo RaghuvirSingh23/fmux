@@ -1,26 +1,21 @@
-# Fmux
+<p align="center">
+  <img src="Assets/AppIcon.png" width="96" alt="Fmux icon">
+</p>
+<h1 align="center">Fmux</h1>
+<p align="center">Floating terminals for agent work.</p>
 
-Fmux is a native macOS terminal canvas. It lets you place multiple terminal sessions in one zoomable workspace, group related terminals, and broadcast input to selected terminals.
+[![Watch Fmux in action](docs/assets/fmux-1-poster.png)](docs/assets/fmux-1.mp4)
 
-## Use It
+A native macOS canvas with movable terminals, session frames, persistent shells, and broadcast input.
 
-Requirements:
+## Install
 
-- macOS 14 or newer
-- Xcode 16 or a Swift 6 toolchain
+Requires macOS 14+ and Xcode 16 or a Swift 6 toolchain.
 
 ```bash
 git clone https://github.com/RaghuvirSingh23/fmux.git
 cd fmux
-make run
-```
-
-`make run` builds a local app bundle at `dist/fmux.app` and opens it.
-
-To install it into Applications:
-
-```bash
 make install
 ```
 
-This builds the app, installs it to `/Applications/fmux.app`, and opens it.
+This installs `/Applications/fmux.app` and opens it. Use `make run` to build and open a local copy from `dist/`.

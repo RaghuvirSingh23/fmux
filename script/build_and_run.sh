@@ -3,6 +3,8 @@ set -euo pipefail
 
 MODE="${1:-run}"
 APP_NAME="fmux"
+APP_DISPLAY_NAME="Fmux"
+LEGACY_APP_NAME="floaterm"
 BUILD_TARGET_NAME="Fmux"
 BUNDLE_ID="com.raghusi.fmux"
 MIN_SYSTEM_VERSION="14.0"
@@ -20,6 +22,7 @@ APP_ICON_NAME="AppIcon.icns"
 APP_ICON_PATH="$APP_RESOURCES/$APP_ICON_NAME"
 
 pkill -x "$APP_NAME" >/dev/null 2>&1 || true
+pkill -x "$LEGACY_APP_NAME" >/dev/null 2>&1 || true
 
 swift build
 
@@ -85,7 +88,9 @@ cat >"$INFO_PLIST" <<PLIST
   <key>CFBundleIdentifier</key>
   <string>$BUNDLE_ID</string>
   <key>CFBundleName</key>
-  <string>$APP_NAME</string>
+  <string>$APP_DISPLAY_NAME</string>
+  <key>CFBundleDisplayName</key>
+  <string>$APP_DISPLAY_NAME</string>
   <key>CFBundleIconFile</key>
   <string>AppIcon</string>
   <key>CFBundlePackageType</key>
