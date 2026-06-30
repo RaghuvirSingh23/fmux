@@ -2456,6 +2456,8 @@ final class ResizeHandleView: NSView {
 }
 
 final class TerminalWebView: WKWebView, WKNavigationDelegate, WKScriptMessageHandler {
+    private static let maximumBufferedChunkCount = 24
+
     var onActivate: ((Bool) -> Void)?
     var onOutput: ((Data) -> Void)?
     var onInput: ((Data) -> Void)?
@@ -2668,6 +2670,10 @@ final class TerminalWebView: WKWebView, WKNavigationDelegate, WKScriptMessageHan
                 evaluateJavaScript("window.termBridge && window.termBridge.writeBase64('\(payload)');")
             } else {
                 bufferedChunks.append(payload)
+                let overflow = bufferedChunks.count - Self.maximumBufferedChunkCount
+                if overflow > 0 {
+                    bufferedChunks.removeFirst(overflow)
+                }
             }
 
             offset = end
@@ -2680,7 +2686,7 @@ final class TerminalWebView: WKWebView, WKNavigationDelegate, WKScriptMessageHan
         }
 
         let queued = bufferedChunks
-        bufferedChunks.removeAll(keepingCapacity: true)
+        bufferedChunks.removeAll(keepingCapacity: false)
 
         for chunk in queued {
             evaluateJavaScript("window.termBridge && window.termBridge.writeBase64('\(chunk)');")

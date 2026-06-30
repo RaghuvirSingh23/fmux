@@ -86,6 +86,29 @@ final class TerminalNodeViewTests: XCTestCase {
         XCTAssertTrue(selectionOutline.isHidden)
     }
 
+    func testTerminalViewsDeallocateAfterRemoval() throws {
+        weak var weakNodeView: TerminalNodeView?
+        weak var weakTerminalView: TerminalWebView?
+
+        autoreleasepool {
+            let (window, _, nodeView) = makeHostedNodeView()
+            weakNodeView = nodeView
+            weakTerminalView = findSubview(in: nodeView, as: TerminalWebView.self)
+
+            nodeView.removeFromSuperview()
+            window.contentView = nil
+            window.close()
+        }
+
+        let timeout = Date().addingTimeInterval(3.0)
+        while (weakNodeView != nil || weakTerminalView != nil), Date() < timeout {
+            RunLoop.main.run(until: Date().addingTimeInterval(0.01))
+        }
+
+        XCTAssertNil(weakNodeView)
+        XCTAssertNil(weakTerminalView)
+    }
+
     private func findSubview<T: NSView>(in root: NSView, as type: T.Type) -> T? {
         if let view = root as? T {
             return view
