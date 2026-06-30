@@ -4,7 +4,7 @@
 <h1 align="center">Fmux</h1>
 <p align="center">Floating terminals for agent work.</p>
 
-[![Watch Fmux in action](docs/assets/fmux-1-poster.png)](docs/assets/fmux-1.mp4)
+[![Fmux demo](docs/assets/fmux-1-preview.gif)](docs/assets/fmux-1.mp4)
 
 A native macOS canvas with movable terminals, session frames, persistent shells, and broadcast input.
 
