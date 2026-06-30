@@ -689,7 +689,7 @@ final class CanvasViewportView: NSView {
             return
         }
 
-        let desiredOrder =
+        let desiredOrder: [NSView] =
             store.frameItems.compactMap { frameViews[$0.id] } +
             store.nodes.compactMap { nodeViews[$0.id] } +
             store.textItems.compactMap { textViews[$0.id] }
