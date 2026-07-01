@@ -87,6 +87,11 @@ final class TerminalNodeViewTests: XCTestCase {
     }
 
     func testTerminalViewsDeallocateAfterRemoval() throws {
+        try XCTSkipIf(
+            ProcessInfo.processInfo.environment["CI"] == "true",
+            "Headless macOS runners crash inside WebKit while forcing immediate WKWebView deallocation."
+        )
+
         weak var weakNodeView: TerminalNodeView?
         weak var weakTerminalView: TerminalWebView?
 
