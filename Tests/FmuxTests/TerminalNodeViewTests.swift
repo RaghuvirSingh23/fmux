@@ -95,6 +95,7 @@ final class TerminalNodeViewTests: XCTestCase {
             weakNodeView = nodeView
             weakTerminalView = findSubview(in: nodeView, as: TerminalWebView.self)
 
+            nodeView.prepareForRemoval()
             nodeView.removeFromSuperview()
             window.contentView = nil
             window.close()

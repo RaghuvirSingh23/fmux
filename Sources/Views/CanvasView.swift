@@ -521,6 +521,7 @@ final class CanvasViewportView: NSView {
         let desiredIDs = Set(store.nodes.map(\.id))
 
         for (id, view) in nodeViews where !desiredIDs.contains(id) {
+            view.prepareForRemoval()
             view.removeFromSuperview()
             nodeViews[id] = nil
         }
@@ -1443,6 +1444,10 @@ final class TerminalNodeView: NSView {
 
     func sendInput(_ data: Data) {
         terminalView.sendInput(data)
+    }
+
+    func prepareForRemoval() {
+        terminalView.shutdown()
     }
 
     private func updateAppearance() {
@@ -2484,6 +2489,7 @@ final class TerminalWebView: WKWebView, WKNavigationDelegate, WKScriptMessageHan
 
     private var session: TerminalSession?
     private var isReady = false
+    private var isShutDown = false
     private var bufferedChunks: [String] = []
     private var lastGridSize = TerminalGridSize(columns: 100, rows: 30)
     private var lastFittedLogicalSize: CGSize = .zero
@@ -2519,6 +2525,27 @@ final class TerminalWebView: WKWebView, WKNavigationDelegate, WKScriptMessageHan
 
     deinit {
         session?.close()
+    }
+
+    func shutdown() {
+        guard !isShutDown else {
+            return
+        }
+
+        isShutDown = true
+        navigationDelegate = nil
+        configuration.userContentController.removeScriptMessageHandler(forName: "terminal")
+        stopLoading()
+
+        session?.onData = nil
+        session?.onExit = nil
+        session?.close()
+        session = nil
+
+        bufferedChunks.removeAll(keepingCapacity: false)
+        onActivate = nil
+        onOutput = nil
+        onInput = nil
     }
 
     override func mouseDown(with event: NSEvent) {
